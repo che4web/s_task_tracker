@@ -1,0 +1,8 @@
+{%extends "base.html"%}
+{%block content%}
+<h1> Скипос сотрудников</h1>
+
+{% for employee in employee_list%}
+<div> <a href="{{employee.get_absolute_url}}">{{employee.name}}</a>.
+{%endfor%}
+{%endblock%}

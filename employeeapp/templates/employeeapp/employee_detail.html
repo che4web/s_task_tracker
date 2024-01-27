@@ -1,0 +1,9 @@
+{%extends "base.html"%}
+{%block content%}
+<h1> Сотрудник {{employee.name}}</h1>
+
+{% for task in employee.task_set.all%}
+<div> <a href="{{task.get_absolute_url}}">{{task.name}}</a>. {{task.employee.name}} {{task.deadlite}} {{task.note.text}} </div>
+
+{%endfor%}
+{%endblock%}

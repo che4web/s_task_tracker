@@ -22,7 +22,7 @@ class Task(models.Model):
                              null=True)
 
     def get_absolute_url(self):
-        return f"task/{self.id}/"
+        return f"/task/{self.id}/"
     def __str__(self):
         return f"{self.id}. {self.name}"
 
