@@ -1,0 +1,5 @@
+<h1> Скипос задач</h1>
+
+{% for task in task_list%}
+<div> <a href="{{task.get_absolute_url}}">{{task.name}}</a>. {{task.employee.name}} {{task.deadlite}}</div>
+{%endfor%}
