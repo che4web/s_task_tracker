@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taskapp',
     'employeeapp',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
