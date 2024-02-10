@@ -2,26 +2,9 @@
 {%block content%}
 <h1> Скипос задач</h1>
 <form >
-<div class="row">
-    <div class="col-3">
-        <input name="name" placeholder="Название" class="form-control" value="{{request.GET.name}}">
-</div>
-    <div class="col-3">
-        <input name="employee"  placeholder="Сотрудник" class="form-control" value="{{request.GET.employee}}">
-</div>
-
-    <div class="col-3">
-        <select name="ordering" class="form-control" value="{{request.GET.ordering}}">
-            <option value="deadlite"> дата</option>
-            <option value="name"> Название</option>
-            <option value="employee"> Сотрудник</option>
-            </select>
-</div>
-    <div class="col-3">
+    {{form.as_p}}
 <button class="btn btn-primary">  Поиск</button>
-</div>
-</div>
-<form >
+</form >
 
 <table class="table table-bordered table-hover">
     <thead>
@@ -42,4 +25,5 @@
 </tr>
 {%endfor%}
 <tbody>
+    </table>
 {%endblock%}
