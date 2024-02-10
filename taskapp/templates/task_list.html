@@ -1,11 +1,13 @@
 {%extends "base.html"%}
 {%block content%}
 <h1> Скипос задач</h1>
+{{request.user}}
 <form >
-    {{form.as_p}}
-<button class="btn btn-primary">  Поиск</button>
+    <input class="form-control" id="id_name" oninput="getTask()">
 </form >
-
+{% comment %}
+<button class="btn btn-primary">  Поиск</button>
+    {{form.as_p}}
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -26,4 +28,36 @@
 {%endfor%}
 <tbody>
     </table>
+
+{%endcomment %}
+<button class="btn btn-primary" onclick="getTask()">  Асинхронный запрос</button>
+<table id="place" class="table table-hover table-bordered"></table>
+    <script>
+        function renderTask(task){
+            return ` <tr>
+                        <td>${task.id} </td>
+                        <td>  <a href="${task.get_absolute_url}">${task.name}</a></td>
+                        <td>${task.employee} </td>
+                        <td>${task.deadlite} </td>
+                    </tr>
+                    `
+
+        }
+        async function getTask(){
+            let name_el = document.getElementById('id_name')
+            let name = name_el.value
+
+           let response =  await fetch("/task/json"+"?name="+name)
+            console.log(response)
+            let el = document.getElementById("place")
+            let html = ''
+            let task_list = (await response.json()).data
+            for (task of task_list){
+                html+=renderTask(task)
+            }
+            el.innerHTML = html 
+        }
+    </script>
+
+
 {%endblock%}

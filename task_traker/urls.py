@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from taskapp.views import task_list,task_detail,task_create,TaskCreateView
+from taskapp.views import task_list,task_detail,task_create,TaskCreateView,task_list_json
 from employeeapp.views import EmployeeListView,EmployeeDetailView
 
 urlpatterns = [
     path('', task_list),
+    path('task/json/', task_list_json),
     path('task/<int:pk>/', task_detail),
     path('task/create', TaskCreateView.as_view()),
     #path('task/create', task_create),
