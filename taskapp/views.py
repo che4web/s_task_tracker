@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from taskapp.models import Task
 from taskapp.forms import TaskSearchForm,TaskForm
+from django.views.generic import CreateView
 
 # Create your views here.
 
@@ -53,12 +54,15 @@ def task_create(request):
         if form.is_valid():
             instanc = form.save()
             return redirect(instanc.get_absolute_url())
-
         else:
             context={
-                "form":form
+            "form":form
             }
 
     return render(request,'task_create.html',context)
+
+class TaskCreateView(CreateView):
+    model = Task
+    fields= '__all__'
 
 
