@@ -1,4 +1,5 @@
 from django import forms
+from taskapp.models import Task
 
 class TaskSearchForm(forms.Form):
     name = forms.CharField(label="Название таски",required=False)
@@ -8,6 +9,15 @@ class TaskSearchForm(forms.Form):
                               input_formats=['%Y-%m-%d','%d.%m.%Y']
                               )
 
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields= '__all__'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

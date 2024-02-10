@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from taskapp.models import Task
-from taskapp.forms import TaskSearchForm
+from taskapp.forms import TaskSearchForm,TaskForm
 
 # Create your views here.
 
@@ -40,3 +40,25 @@ def task_detail(request,pk):
         "task" : Task.objects.get(id=pk)
     }
     return render(request,'task_detail.html',context)
+
+def task_create(request):
+    context ={}
+    if request.method=="GET":
+        form = TaskForm()
+        context={
+        "form":form
+        }
+    if request.method=="POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            instanc = form.save()
+            return redirect(instanc.get_absolute_url())
+
+        else:
+            context={
+                "form":form
+            }
+
+    return render(request,'task_create.html',context)
+
+
